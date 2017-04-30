@@ -37,6 +37,17 @@ module.exports = {
       }]
     }]
   },
+  node: {
+    console: true,
+    global: true,
+    process: true,
+    Buffer: true,
+    __filename: "mock",
+    __dirname: "mock",
+    setImmediate: true, fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+},
   plugins: devMode
     ? [new LiveReloadPlugin({appendScriptTag: true})]
     : []
