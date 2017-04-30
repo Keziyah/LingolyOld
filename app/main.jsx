@@ -10,13 +10,14 @@ import SpeechWriter from './components/SpeechWriter'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
+import Recorder from './components/Recorder'
 
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <Route path="/write" component={SpeechWriter} />
-      </Route>
+      <Route path="/" component={App}/>
+      <Route path="/write" component={SpeechWriter} />
+      <Route path="/record" component={Recorder} />
       <Route path='*' component={NotFound} />
     </Router>
   </Provider>,
