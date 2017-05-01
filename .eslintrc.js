@@ -1,15 +1,15 @@
-module.exports = {
-  extends: "eslint-config-standard",
-  root: true,
-  parser: "babel-eslint",
-  parserOptions: {
-    sourceType: "module",
-    ecmaVersion: 8
-  },
-  ecmaFeatures: {
-    jsx: true,
-  },
-  plugins: ['react'],
+// module.exports = {
+//   extends: "eslint-config-standard",
+//   root: true,
+//   parser: "babel-eslint",
+//   parserOptions: {
+//     sourceType: "module",
+//     ecmaVersion: 8
+//   },
+//   ecmaFeatures: {
+//     jsx: true,
+//   },
+//   plugins: ['react'],
   // rules: {
   //   "space-before-function-paren": ["error", "never"],
   //   "prefer-const": "warn",
@@ -43,4 +43,4 @@ module.exports = {
 //       }
 //     }],
 //   },
-}
+// }
