@@ -6,7 +6,7 @@ const AudioFiles = (props) => {
             {
                 props.files.map(file => {
                     return (
-                    <div className="audiofile" key={file.stopTime}>
+                    <div className="audiofile anim" key={file.stopTime}>
                         <audio key={file.startTime} controls>
                             <source src={file.blobURL}/>
                         </audio>

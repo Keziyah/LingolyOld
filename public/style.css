@@ -9,8 +9,12 @@ a, a:visited {
     font-weight: 400;
 }
 
-button:focus, textarea:focus {outline:0;}
+button:focus, textarea:focus, input:focus {outline:0;}
 
+button {
+    margin-right: 5%; 
+    margin-left: 10px; 
+}
 
 textarea {
     border: 3px solid #cccccc;
@@ -112,6 +116,10 @@ APP PAGE
     height: 100vh; 
 }
 
+#start-writing {
+    margin: 0 auto; 
+}
+
 #mynav {
     margin-bottom: 0; 
     height: 7vh; 
@@ -123,7 +131,7 @@ APP PAGE
 
 /*CONTROL PANEL*/
 #controls {
-    background: #b8bac3; 
+    background: #fbfbfb; 
     height: 93vh; 
 }
 
@@ -132,7 +140,7 @@ APP PAGE
     margin-top: 5%;
 }
 #recorder-header {
-    margin: 5% 0 0 30%; 
+    margin: 5% 0 0 32%; 
     font-size: 2em; 
 }
 
@@ -160,8 +168,8 @@ audio {
 #audio-canvas {
     height: 100px; 
     width: 100%; 
-    margin-top: 10%; 
-    margin-left: 10px; 
+    margin-top: 0; 
+    margin-left: 5px; 
 }
 
 .glyphicon.glyphicon-download {
@@ -176,7 +184,7 @@ audio {
 }
 
 .audiofile {
-    height: 100px; 
+    height: 40px; 
 }
 
 /*TIMER*/
@@ -223,6 +231,30 @@ form {
     font-size: 3em; 
 }
 
+/*
+Pronunciation dictionary
+*/
+
+#prondict {
+    padding-left: 10%; 
+}
+
+
+#pron-audio {
+    margin-left: 0; 
+}
+
+#ipa {
+    margin-left: 30%; 
+}
+
+.mdl-textfield__input {
+    width: 50%; 
+}
+
+#look-up {
+    margin-left: 20%; 
+}
 /*
 Fade in Animations
 */

@@ -61,7 +61,6 @@ export default class Grammar extends Component {
     }
 
     render() {
-        console.log("this.state", this.state)
         return (
             <div className="row anim">
                 <div className="col-md-5">
@@ -69,7 +68,7 @@ export default class Grammar extends Component {
                         <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="60" rows="10"></textarea>
                         <div>
                             <button className="mdl-button mdl-js-button mdl-button--raised" type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
-                            {!this.state.disabled && <button className="mdl-button mdl-js-button mdl-button--raised" onClick={this.saveSpeech}>Save</button>}
+                            {!this.state.disabled && <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={this.saveSpeech}>Save</button>}
                         </div>
                     </form>
                 </div>
@@ -83,7 +82,7 @@ export default class Grammar extends Component {
                     <div className="corrections">
                         {this.state.corrections.length ?
                             this.state.corrections.map((thing, i) => {
-                                return <p key={i}>{i + 1}. {thing.message}</p>
+                                return <h4 key={i}>{i + 1}. {thing.message}</h4>
                             })
                             : this.state.grammarMessage || "Grammar looks fine."
                         }
