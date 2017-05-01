@@ -59,10 +59,9 @@ export default class Grammar extends Component {
             <div>
                 <form onSubmit={this.checkGrammar}>
                     <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="60" rows="10"></textarea>
+                     <button type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
+
                 </form>
-
-                 <button type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
-
                     {
                         this.state.showHighlights &&
                         <HighlightedTextarea highlight={this.doHighlight} value={this.state.text} ></HighlightedTextarea>
