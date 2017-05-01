@@ -4,6 +4,14 @@ a, a:visited {
     text-decoration: none;
 }
 
+* {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+}
+
+button:focus, textarea:focus {outline:0;}
+
+
 textarea {
     border: 3px solid #cccccc;
     padding: 5px; 
@@ -124,7 +132,8 @@ APP PAGE
     margin-top: 5%;
 }
 #recorder-header {
-    margin: 0 0 0 35%; 
+    margin: 5% 0 0 30%; 
+    font-size: 2em; 
 }
 
 audio {
@@ -158,12 +167,23 @@ audio {
 .glyphicon.glyphicon-download {
     font-size: 2em; 
     margin-left: 2%; 
+    margin-bottom: 15%; 
+}
+
+.download-link {
+    display: inline-block; 
+    margin-top: 5%; 
+}
+
+.audiofile {
+    height: 100px; 
 }
 
 /*TIMER*/
 #timer-header {
     margin-left: 40%; 
     margin-top: 10%; 
+    font-size: 2em; 
 }
 
 #time-display {
@@ -188,8 +208,39 @@ audio {
     margin: 4px; 
 }
 
-/**/
-/**/
+/*GRAMMAR CHECKER*/
+
+form {
+    width: 490px; 
+}
+
+#correct {
+    width: 400px; 
+    margin-left: 5%; 
+}
+
+#speechwriter h3 {
+    font-size: 3em; 
+}
+
+/*
+Fade in Animations
+*/
+
+.anim {
+    animation: anim 1s ease-out 0s 1;  
+}
+
+
+@keyframes anim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+         opacity: 1; 
+    }
+}
+
 /**/
 /**//**/
 /**/
