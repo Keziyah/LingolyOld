@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import PropTypes from 'prop-types'
+//A component built on the Web Speech API
 import SpeechRecognition from 'react-speech-recognition'
-import Recorder from './Recorder'
-import Timer from './Timer'
 import Grammar from './Grammar'
-
 
 const propTypes = {
     // Props injected by SpeechRecognition
@@ -19,26 +17,14 @@ class SpeechWriter extends Component {
         super(props)
 
         this.state = {
-            recording: false,
-            timing: false,
             grammar: false
         }
 
-        this.record = this.record.bind(this)
-        this.timer = this.timer.bind(this)
         this.checkGrammar = this.checkGrammar.bind(this)
     }
 
-    record() {
-        this.setState({ recording: true })
-    }
-
-    timer() {
-        this.setState({ timing: true })
-    }
-
     checkGrammar() {
-        this.setState({grammar: !this.state.grammar})
+        this.setState({ grammar: !this.state.grammar })
     }
 
     render() {
@@ -47,25 +33,23 @@ class SpeechWriter extends Component {
             return null
         }
         return (
-            <div className="textarea" >
-                <div>
-                    <textarea rows="10" cols="60" placeholder="Start talking or write your speech here." value={transcript}></textarea>
+            <div className="container">
+                <div id="speechwriter">
+                    <h3>Write your speech.</h3>
+                    <div>
+                        <textarea rows="10" cols="60" placeholder="Start talking to write your speech here." value={transcript}></textarea>
+                    </div>
+                    <button onClick={resetTranscript}>Reset</button>
+                    <button>Save</button>
+                    <button onClick={this.checkGrammar}>Show Grammar Checker</button>
                 </div>
-                <button onClick={resetTranscript}>Reset</button>
-                <button>Save</button>
-                <button onClick={this.checkGrammar}>Show Grammar Checker</button>
-                <button onClick={this.record}>Show Recorder</button>
-                <button onClick={this.timer}>Show Timer</button>
-                <Link to="/"><button onClick={() => window.location.reload()}>Exit</button></Link>
-                {this.state.recording && <Recorder />}
-                {this.state.timing && <Timer />}
-                {this.state.grammar && <Grammar transcript={transcript}/>}
+                {this.state.grammar && <Grammar transcript={transcript} />}
             </div>
         )
     }
 }
 
-//Above: I have to reload the page in order to get recognition to stop listening. 
+//Above with the exit link (it's now in the navbar in home): I have to reload the page in order to get recognition to stop listening. 
 //Otherwise I do not know how to turn recognition off. 
 
 SpeechWriter.propTypes = propTypes

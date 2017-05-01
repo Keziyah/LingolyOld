@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import rp from 'request-promise'
+import HighlightedTextarea from 'react-highlighted-textarea'
+
+//using the language tool api: https://languagetool.org/http-api/swagger-ui/#!/default/post_check 
 
 export default class Grammar extends Component {
     constructor(props) {
@@ -9,11 +11,13 @@ export default class Grammar extends Component {
         this.state = {
             text: '',
             disabled: true,
-            corrections: [], 
-            grammarMessage: ''
+            corrections: [],
+            grammarMessage: '',
+            showHighlights: false
         }
         this.readyForCheck = this.readyForCheck.bind(this)
         this.checkGrammar = this.checkGrammar.bind(this)
+        this.doHighlight = this.doHighlight.bind(this)
     }
 
     componentWillMount() {
@@ -23,7 +27,6 @@ export default class Grammar extends Component {
 
     readyForCheck(e) {
         this.setState({ text: e.target.value, disabled: false })
-        console.log(e.target.defaultValue, "EVENT")
     }
 
     checkGrammar(e) {
@@ -36,28 +39,41 @@ export default class Grammar extends Component {
             })
             .catch(console.error)
 
-            if(!this.state.corrections.length) {
-                this.setState({grammarMessage: "Grammar looks fine."})
-            } else {
-                this.setState({grammarMessage: "Checking..."})
-            }
+        if (!this.state.corrections.length) {
+            this.setState({ grammarMessage: "Checking..." })
+        } 
+
+        this.setState({ showHighlights: true })
+    }
+
+    doHighlight() {
+         let arr = this.state.corrections.map(mistake => {
+            return [mistake.offset, mistake.length]
+        })
+        return arr
     }
 
     render() {
-        const okMessage = <h4>Grammar looks fine.</h4>
+        console.log("this.state", this.state)
         return (
             <div>
                 <form onSubmit={this.checkGrammar}>
-                    <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="30" rows="10"></textarea>
-                    <button type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
+                    <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="60" rows="10"></textarea>
                 </form>
+
+                 <button type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
+
+                    {
+                        this.state.showHighlights &&
+                        <HighlightedTextarea highlight={this.doHighlight} value={this.state.text} ></HighlightedTextarea>
+                    }
 
                 <div className="corrections">
                     {this.state.corrections.length ?
-                    this.state.corrections.map(thing => {
-                         return <p key={thing.message}>{thing.message}</p>
-                    })
-                    : this.state.grammarMessage
+                        this.state.corrections.map((thing, i) => {
+                            return <p key={i}>{thing.message}</p>
+                        })
+                        : this.state.grammarMessage || "Grammar looks fine."
                     }
                 </div>
             </div>
@@ -70,30 +86,9 @@ export default class Grammar extends Component {
 //Once they edit their speech, or once the value of the text area has been changed
 //  the check grammar button is enabled
 //The person clicks check grammar which makes the api request. 
+//The api sends us the mistakes and the indexes of where they are in the string. 
+// When the button is clicked, show highlight is set to true, which enables the display of the highlighted mistakes. 
 
-//defaultValue={this.props.transcript}
+//Highlighted text area normally comes with it's own textarea, but I set that to hidden in the CSS
 
-// axios.post('https://languagetool.org/api/v2/check', {
-//            data: {text: text, language: "en"}, 
-//            headers: { "Content-Type": 'application/json'}
-//         })
 
- // let options = {
-        //     method: 'GET',
-        //     uri: 'https://languagetool.org/api/v2/check?text=' + newtext + '&language=en',
-        //     text: newtext,
-        //     language: 'en',
-        //     header: {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Content-Type': 'multipart/form-data'
-        // },
-        //     json: true // Automatically stringifies the body to JSON
-        // }
-
-        // rp(options)
-        //     .then(function (parsedBody) {
-        //         console.log("YAY", parsedBody)
-        //     })
-        //     .catch(function (err) {
-        //         console.error(err)
-        //     });

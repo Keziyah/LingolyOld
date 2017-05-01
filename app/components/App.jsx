@@ -19,11 +19,26 @@ class App extends Component {
 
     render() {
         return (
-            <div className="app">
-                <h1>Hello I am the main app component</h1>
-                <Link to="/write"><button>Start speech</button></Link>
-            </div>
-        )
+            <div className="homepage-hero-module">
+                <div className="video-container">
+                    <div className="filter"></div>
+                    <video autoPlay loop className="fillWidth">
+                        <source src="pencil_down.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                        <source src="pencil_down.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                    </video>
+                    <div className="poster hidden">
+                        <img src="pencil_down.jpg" alt="Someone erasing with a pencil" />
+                    </div>
+                    <div id="overlay">
+                        <div className="container" id="homepage">
+                            <h1 id="lingoly">lingoly</h1>
+                            <h3 id="header-tag">A speechwriting app for language learners.</h3>
+                            <Link to="/write"><button id="start-here">Write something amazing</button></Link>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+            )
     }
 }
 

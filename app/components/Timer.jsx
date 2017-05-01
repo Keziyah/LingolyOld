@@ -44,32 +44,26 @@ export default class Timer extends Component {
         }
     }
 
-    setSeconds() {
-
-    }
-
     render() {
-        // let elapsed = Math.round(this.state.time / 100)
-        // let seconds = (elapsed / 10)
-        // if (seconds > 59) seconds = 0
-        // else if (seconds < 10) seconds = "0" + (elapsed/10)
         let minutes = Math.round(this.state.time / 60000)
         if (minutes < 10) {
             minutes = "0" + Math.floor(this.state.time / 60000)
-        console.log(this.state)
-    }
+        }
 
         let seconds = Math.round(this.state.time / 1000)
         if (seconds > 59) {
-            let seconds = Math.round(this.state.time / 1000) - (minutes * 60)
+            seconds = Math.round(this.state.time / 1000) - (minutes * 60)
         }
+
         return (
-            <div>
-                <button onClick={this.startTimer}>Start Timer</button>
-                <button onClick={this.stopTimer}>{this.state.paused ? "Resume" : "Pause"}</button>
-                <button onClick={this.resetTimer}>Reset Timer</button>
-                <div>
-                    minutes: {minutes} seconds: {seconds}
+            <div id="timer" className="container">
+                <div id="time-display">
+                    <h1>{minutes}:{seconds < 10 ? "0" + seconds : seconds}</h1>
+                </div>
+                <div id="time-buttons">
+                    <button onClick={this.startTimer}>Start</button>
+                    <button onClick={this.stopTimer}>{this.state.paused ? "Resume" : "Pause"}</button>
+                    <button onClick={this.resetTimer}>Reset</button>
                 </div>
             </div>
         )

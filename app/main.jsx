@@ -6,7 +6,8 @@ import {connect, Provider} from 'react-redux'
 
 import store from './store'
 import App from './components/App'
-import SpeechWriter from './components/SpeechWriter'
+// import SpeechWriter from './components/SpeechWriter'
+import Home from './components/Home'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
@@ -16,7 +17,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}/>
-      <Route path="/write" component={SpeechWriter} />
+      <Route path="/write" component={Home} />
       <Route path="/record" component={Recorder} />
       <Route path='*' component={NotFound} />
     </Router>
