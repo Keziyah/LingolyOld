@@ -67,7 +67,7 @@ export default class Grammar extends Component {
                     <form onSubmit={this.checkGrammar}>
                         <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="60" rows="10"></textarea>
                         <div>
-                            <button className="mdl-button mdl-js-button mdl-button--raised" type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
+                            <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
                             {!this.state.disabled && <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={this.saveSpeech}>Save</button>}
                         </div>
                     </form>
