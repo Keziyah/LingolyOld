@@ -11,12 +11,15 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="app">
+            <div className="app anim">
 
                 {/*Da Navbar*/}
                 <nav className="navbar navbar-default" id="mynav">
                     <div className="container">
                         <div className="navbar-header">
+                            <Link to="/saved"><button className='mdl-button mdl-js-button mdl-button--raised'>View Saved</button></Link>
+                        </div>
+                        <div className="navbar-header navbar-right">
                             <Link to="/" onClick={() => window.location.reload()}>lingoly</Link>
                         </div>
                     </div>
@@ -31,7 +34,7 @@ export default class Home extends Component {
                         <Timer/>
                     </div>
 
-                    <div className="col-md-5">
+                    <div className="col-md-8">
                         <SpeechWriter />
                     </div>
                 </div>

@@ -18,6 +18,7 @@ export default class Grammar extends Component {
         this.readyForCheck = this.readyForCheck.bind(this)
         this.checkGrammar = this.checkGrammar.bind(this)
         this.doHighlight = this.doHighlight.bind(this)
+        this.saveSpeech = this.saveSpeech.bind(this)
     }
 
     componentWillMount() {
@@ -41,39 +42,52 @@ export default class Grammar extends Component {
 
         if (!this.state.corrections.length) {
             this.setState({ grammarMessage: "Checking..." })
-        } 
+        }
 
         this.setState({ showHighlights: true })
     }
 
     doHighlight() {
-         let arr = this.state.corrections.map(mistake => {
+        let arr = this.state.corrections.map(mistake => {
             return [mistake.offset, mistake.length]
         })
         return arr
     }
 
+    saveSpeech() {
+        axios.post('/api/newspeech', {content: this.state.text})
+        .then(res => console.log(res.data))
+        .catch(console.error)
+    }
+
     render() {
         console.log("this.state", this.state)
         return (
-            <div>
-                <form onSubmit={this.checkGrammar}>
-                    <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="60" rows="10"></textarea>
-                     <button type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
+            <div className="row anim">
+                <div className="col-md-5">
+                    <form onSubmit={this.checkGrammar}>
+                        <textarea onChange={this.readyForCheck} value={this.state.text} name="checker" id="grammarCheck" cols="60" rows="10"></textarea>
+                        <div>
+                            <button className="mdl-button mdl-js-button mdl-button--raised" type="submit" disabled={this.state.disabled}>{this.state.disabled ? "Edit your speech first." : "Check Grammar"}</button>
+                            {!this.state.disabled && <button className="mdl-button mdl-js-button mdl-button--raised" onClick={this.saveSpeech}>Save</button>}
+                        </div>
+                    </form>
+                </div>
 
-                </form>
+                <div className="col-md-5" id="correct">
                     {
                         this.state.showHighlights &&
-                        <HighlightedTextarea highlight={this.doHighlight} value={this.state.text} ></HighlightedTextarea>
+                        <HighlightedTextarea highlight={this.doHighlight} value={this.state.text}></HighlightedTextarea>
                     }
 
-                <div className="corrections">
-                    {this.state.corrections.length ?
-                        this.state.corrections.map((thing, i) => {
-                            return <p key={i}>{thing.message}</p>
-                        })
-                        : this.state.grammarMessage || "Grammar looks fine."
-                    }
+                    <div className="corrections">
+                        {this.state.corrections.length ?
+                            this.state.corrections.map((thing, i) => {
+                                return <p key={i}>{i + 1}. {thing.message}</p>
+                            })
+                            : this.state.grammarMessage || "Grammar looks fine."
+                        }
+                    </div>
                 </div>
             </div>
         )

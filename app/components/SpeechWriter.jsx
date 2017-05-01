@@ -33,15 +33,14 @@ class SpeechWriter extends Component {
             return null
         }
         return (
-            <div className="container">
+            <div className="container anim">
                 <div id="speechwriter">
                     <h3>Write your speech.</h3>
                     <div>
                         <textarea rows="10" cols="60" placeholder="Start talking to write your speech here." value={transcript}></textarea>
                     </div>
-                    <button onClick={resetTranscript}>Reset</button>
-                    <button>Save</button>
-                    <button onClick={this.checkGrammar}>Show Grammar Checker</button>
+                    <button className="mdl-button mdl-js-button mdl-button--raised" onClick={resetTranscript}>Reset</button>
+                    <button className="mdl-button mdl-js-button mdl-button--raised" onClick={this.checkGrammar}>Show Grammar Checker</button>
                 </div>
                 {this.state.grammar && <Grammar transcript={transcript} />}
             </div>

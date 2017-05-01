@@ -54,3 +54,4 @@ export default class Recorder extends Component {
     );
   }
 }
+
